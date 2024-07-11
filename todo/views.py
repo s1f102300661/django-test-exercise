@@ -51,8 +51,8 @@ def update(request, task_id):
 
 def close(request, task_id):
     try:
-        task Task.objects.get(pk=task_id)
-    except Task. Does Not Exist:
+        task = Task.objects.get(pk=task_id)
+    except Task.DoesNotExist:
         raise Http404("Task does not exist")
     task.completed = True
     task.save()
