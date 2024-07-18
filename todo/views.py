@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.utils.timezone import make_aware
 from django.utils.dateparse import parse_datetime
@@ -17,8 +17,11 @@ def index(request):
     else:
         tasks = Task.objects.order_by('-posted_at')
 
+    favorite_tasks = Task.objects.filter(favorite=True)
+
     context = {
-        'tasks': tasks
+        'tasks': tasks,
+        'favorite_tasks': favorite_tasks
     }
     return render(request, 'todo/index.html', context)
 
@@ -65,3 +68,9 @@ def close(request, task_id):
     task.completed = True
     task.save()
     return redirect(index)
+
+def toggle_favorite(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    task.favorite = not task.favorite
+    task.save()
+    return redirect('index')
