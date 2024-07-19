@@ -20,6 +20,9 @@
       {% else %}
       <li>Status: Not Completed</li>
       {% endif %}
+      {% if task.photo %}
+      <li><img src="{{ task.photo.url }}" alt="Task Photo" style="max-width: 200px;"></li>
+      {% endif %}
     </ul>
 
     <div>
