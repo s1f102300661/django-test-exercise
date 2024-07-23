@@ -4,6 +4,8 @@ from django.utils.timezone import make_aware
 from django.utils.dateparse import parse_datetime
 from todo.models import Task
 from django.conf import settings
+from django.http import HttpResponse
+from PIL import Image
 
 # Create your views here.
 
@@ -75,3 +77,12 @@ def toggle_favorite(request, task_id):
     task.favorite = not task.favorite
     task.save()
     return redirect('index')
+
+def test_pillow(request):
+    try:
+        img = Image.new('RGB', (100, 100), color = (73, 109, 137))
+        img.save('test_image.png')
+        return HttpResponse("Pillow is working correctly.")
+    except Exception as e:
+        return HttpResponse(f"Error: {e}")
+

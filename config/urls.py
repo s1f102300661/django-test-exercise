@@ -19,6 +19,7 @@ from django.urls import path
 from todo import views as todo_views
 from django.conf import settings
 from django.conf.urls.static import static
+from todo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +29,5 @@ urlpatterns = [
     path('<int:task_id>/update', todo_views.update, name='update'),
     path('<int:task_id>/close', todo_views.close, name='close'),
     path('toggle_favorite/<int:task_id>/', todo_views.toggle_favorite, name='toggle_favorite'),
+    path('test_pillow/', views.test_pillow, name='test_pillow'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
