@@ -6,6 +6,7 @@
     <title>To Do Application</title>
     <meta charset="UTF-8">
     <meta name="author" content="INIAD">
+    <link rel="stylesheet" href="{% static 'todo/index.css' %}">
   </head>
 
   <body>
@@ -13,6 +14,7 @@
     <p>You can submit tasks from the following form.</p>
     <form action="{% url 'index' %}" method="post">
       {% csrf_token %}
+      <div class="sub">
       <div>
         <label for="titleInput">Title</label><br>
         <input id="titleInput" name="title" type="text" placeholder="Input title">
@@ -24,6 +26,7 @@
       <div>
         <button type="submit">Submit</button>
       </div>
+      </div>
     </form>
     <br>
 
@@ -34,7 +37,7 @@
 
     {% for task in tasks %}
     <div class="text">
-      <h2><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
+      <h2 class="ass"><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
       <ul>
         <li>Posted at: {{ task.posted_at }}</li>
         {% if task.due_at %} 
@@ -52,10 +55,10 @@
 
     <p>----------------------------------------</p>
 
-    <h2>ブックマーク</h2>
+    <h2 class="book">ブックマーク</h2>
     {% for task in favorite_tasks %}
     <div class="text">
-        <h2><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
+        <h2 class="ass"><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
         <ul>
             <li>Posted at: {{ task.posted_at }}</li>
             {% if task.due_at %} 
