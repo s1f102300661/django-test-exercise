@@ -10,6 +10,7 @@ class Task(models.Model):
     posted_at = models.DateTimeField(default=timezone.now)
     due_at = models.DateTimeField(null=True, blank=True)
     favorite = models.BooleanField(default=False)
+    likes_count = models.PositiveIntegerField(default=0)
 
     def is_overdue(self, dt):
         if self.due_at is None:

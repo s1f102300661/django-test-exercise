@@ -49,6 +49,12 @@
         <li>Status: Not Completed</li>
         {% endif %}
         <li><a href="{% url 'toggle_favorite' task.id %}">fav</a></li>
+        <form method="post" action="{% url 'index' %}">
+          {% csrf_token %}
+          <input type="hidden" name="like" value="{{ task.id }}">
+          <button type="submit">👍</button>
+        </form>
+        <p>{{ task.likes_count }} いいね</p>
       </ul>
     </div>
     {% endfor %}
