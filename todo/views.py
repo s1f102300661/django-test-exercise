@@ -16,7 +16,7 @@ def index(request):
             task.save()
             return redirect('detail', task_id=task_id)
 
-        task = Task(title=request.POST['title'], due_at=make_aware(parse_datetime(request.POST['due_at'])))
+        task = Task(title=request.POST['title'], due_at=make_aware(parse_datetime(request.POST['due_at'])), genre=request.POST.get('genre', 'other') )
         task.save()
 
     if request.GET.get('order') == 'due':
