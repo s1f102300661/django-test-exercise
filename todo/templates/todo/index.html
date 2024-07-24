@@ -26,6 +26,14 @@
       <div>
         <button type="submit">Submit</button>
       </div>
+      <div>
+        <label for="genreInput">Genre:</label><br>
+        <select id="genreInput" name="genre">
+          <option value="report">Report</option>
+          <option value="program">Program</option>
+          <option value="other" selected>Other</option>
+        </select>
+      </div>
       </div>
     </form>
     <br>
@@ -48,7 +56,14 @@
         {% else %}
         <li>Status: Not Completed</li>
         {% endif %}
+        <li>Genre: {{ task.get_genre_display }}</li>
         <li><a href="{% url 'toggle_favorite' task.id %}">fav</a></li>
+        <form method="post" action="{% url 'index' %}">
+          {% csrf_token %}
+          <input type="hidden" name="like" value="{{ task.id }}">
+          <button type="submit">👍</button>
+        </form>
+        <p>{{ task.likes_count }} いいね</p>
       </ul>
     </div>
     {% endfor %}
