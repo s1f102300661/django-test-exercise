@@ -16,9 +16,11 @@ class Task(models.Model):
     posted_at = models.DateTimeField(default=timezone.now)
     due_at = models.DateTimeField(null=True, blank=True)
     favorite = models.BooleanField(default=False)
+    photo = models.ImageField(upload_to='tasks/', null=True, blank=True)
     likes_count = models.PositiveIntegerField(default=0)
     genre = models.CharField(max_length=20, choices=GENRE_CHOICES, default='other')
     
+
     def is_overdue(self, dt):
         if self.due_at is None:
             return False
